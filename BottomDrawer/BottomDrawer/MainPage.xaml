@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="BottomDrawer.MainPage">
+
+    <AbsoluteLayout x:Name="MainAbsoluteLayout"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand">
+
+        <Grid AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="1, 1, 1, 1">
+
+            <Button Text="Show Menu"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    TranslationY="-30"
+                    WidthRequest="120"
+                    Clicked="ShowMenu" />
+        </Grid>
+
+        <StackLayout x:Name="OpaqueContainer"
+                     AbsoluteLayout.LayoutFlags="All"
+                     AbsoluteLayout.LayoutBounds="1, 1, 1, 1"
+                     BackgroundColor="Black"
+                     Opacity="0"
+                     IsVisible="False">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="HideMenu" />
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+
+        <Frame x:Name="MenuFrame"
+               AbsoluteLayout.LayoutBounds="1, 1, 1, 1"
+               AbsoluteLayout.LayoutFlags="All"
+               BackgroundColor="White"
+               HasShadow="False"
+               CornerRadius="10"
+               Padding="10"
+               TranslationY="300"
+               IsClippedToBounds="True">
+
+            <Frame.GestureRecognizers>
+                <PanGestureRecognizer PanUpdated="OnMenuFramePanUpdated" />
+            </Frame.GestureRecognizers>
+
+            <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand">
+                <Frame HeightRequest="5"
+                       CornerRadius="5"
+                       WidthRequest="40"
+                       BackgroundColor="Silver"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                       HasShadow="False" />
+
+                <Grid VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      Padding="0">
+
+                    <Label Text="Bottom Drawer"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand" />
+
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </AbsoluteLayout>
+</ContentPage>
