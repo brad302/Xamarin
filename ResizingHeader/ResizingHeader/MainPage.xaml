@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="ResizingHeader.MainPage">
+    <StackLayout>
+        <!-- Place new controls here -->
+        <StackLayout HeightRequest="{Binding NavigationBarHeight}" HorizontalOptions="FillAndExpand" BackgroundColor="Silver">
+            <Label Text="Navigation Title" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black" Margin="0, 0, 0, 20" />
+        </StackLayout>
+        <ListView x:Name="MyListView" Scrolled="MyListView_Scrolled" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ListSource}" SeparatorColor="Silver" SeparatorVisibility="Default" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="15" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
