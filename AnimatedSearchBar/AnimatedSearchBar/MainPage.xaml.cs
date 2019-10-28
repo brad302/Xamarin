@@ -67,9 +67,6 @@ namespace AnimatedSearchBar
             uint fadeSpeed = 250;
             var easing = Easing.CubicInOut;
 
-            Console.WriteLine(_isSearchVisible);
-            Console.WriteLine(SearchText);
-
             if (_isSearchVisible)
             {
                 if (string.IsNullOrEmpty(SearchText))
