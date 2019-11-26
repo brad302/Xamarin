@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CameraVision.CameraVisionPage">
+
+    <NavigationPage.TitleView>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Camera Vision" TextColor="Black" FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Grid.Column="1" />
+
+            <ImageButton Source="camera.png" Clicked="CameraClicked" HorizontalOptions="EndAndExpand" HeightRequest="30" WidthRequest="30" Aspect="AspectFit" Grid.Column="2" Margin="0, 0, 5, 0" />
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <CollectionView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ItemSizingStrategy="MeasureAllItems" SelectionMode="None" ItemsSource="{Binding ItemList}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Padding="15">
+                    <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Image Source="trophy.png" Aspect="AspectFit" WidthRequest="30" HeightRequest="30" />
+                        <Label Grid.Column="1" Text="{Binding TopCandidate}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding OtherCandidates}" FontSize="Small" TextColor="Silver" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" />
+                    </Grid>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
