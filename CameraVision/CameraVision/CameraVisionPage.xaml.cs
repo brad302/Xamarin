@@ -7,7 +7,7 @@ namespace CameraVision
 {
     public enum TextRecognitionLevelEnum
     {
-        Accurate = 10,
+        Accurate = 0,
         Fast = 1
     }
 
