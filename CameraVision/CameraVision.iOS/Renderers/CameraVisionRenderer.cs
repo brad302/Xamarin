@@ -30,8 +30,7 @@ namespace CameraVision.iOS.Renderers
 
         public void ShowDocumentViewController()
         {
-            VNDocumentCameraViewController cameraViewController;
-            cameraViewController = new VNDocumentCameraViewController
+            var cameraViewController = new VNDocumentCameraViewController
             {
                 Delegate = this
             };
