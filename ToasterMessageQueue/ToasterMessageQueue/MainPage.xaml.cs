@@ -26,14 +26,14 @@ namespace ToasterMessageQueue
                 {
                     NewMessageFrameFormat = new MessageFrameFormat()
                     {
-                        BackgroundColor = Color.Navy,
-                        BorderColor = Color.Navy,
+                        BackgroundColor = Color.White,
+                        BorderColor = Color.Silver,
                         CornerRadius = 5
                     },
                     NewMessageLabelFormat = new MessageLabelFormat()
                     {
                         FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-                        TextColor = Color.White,
+                        TextColor = Color.Black,
                         FontAttributes = FontAttributes.None
                     },
                     PreformatOption = ToastPreformatOption.None
@@ -42,7 +42,7 @@ namespace ToasterMessageQueue
                 {
                     StartPosition = 0.95f,
                     ScrollDirection = ScrollDirection.Up,
-                    MaxMessagesShown = 4,
+                    MaxMessagesShown = 6,
                     MovementOffset = -3,
                     ScaleAdjustmentType = ScaleAdjustmentType.Change,
                     ScaleAdjustment = -0.01
@@ -53,7 +53,10 @@ namespace ToasterMessageQueue
 
         private async void ShowMessages(object sender, EventArgs e)
         {
-            await _toast.AddMessage($"This is a new message to test the functionality with.  Here's hoping it works!  {_index++}");
+            _index++;
+            _index = _index * 10;
+
+            await _toast.AddMessage($"This is a new message to test the functionality with. {_index++}");
 
             var preformatValues = Enum.GetNames(typeof(ToastPreformatOption));
             var preformatValue = preformatValues[(new Random()).Next(0, preformatValues.Length)];

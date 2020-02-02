@@ -167,9 +167,9 @@ namespace ToasterMessageQueue
                     break;
 
                 case ToastPreformatOption.Information:
-                    textColor = Color.FromHex("#004085");
-                    backgroundColor = Color.FromHex("#cce5ff");
-                    borderColor = Color.FromHex("#b8daff");
+                    textColor = Color.FromHex("#31708f");
+                    backgroundColor = Color.FromHex("#d9edf7");
+                    borderColor = Color.FromHex("#bce8f1");
                     break;
 
                 case ToastPreformatOption.Success:
@@ -232,6 +232,8 @@ namespace ToasterMessageQueue
             int index = 1;
             double opacityAdjustment = 1d / Options.NewMessagePosition.MaxMessagesShown;
 
+            var animations = new List<Task>();
+
             // Loop through all of the existing messages and translate them up/down.
             try
             {
@@ -241,6 +243,8 @@ namespace ToasterMessageQueue
 
                     var existingMessage = (Frame)messages.ElementAt(i - 1);
                     var message = existingMessage.Content as Label;
+
+                    Console.WriteLine(message.FormattedText);
 
                     if (Options.NewMessagePosition.ScaleAdjustmentType == ScaleAdjustmentType.Change)
                         existingMessage.Scale = existingMessage.Scale + Options.NewMessagePosition.ScaleAdjustment;
@@ -253,11 +257,19 @@ namespace ToasterMessageQueue
                     var easing = Easing.CubicInOut;
 
                     if (Options.NewMessagePosition.ScrollDirection == ScrollDirection.Up)
-                        existingMessage.TranslateTo(0, existingMessage.TranslationY - (existingMessage.Height * existingMessage.Scale) +
+                    {
+                        var animation = existingMessage.TranslateTo(0, existingMessage.TranslationY - (frame.Height * existingMessage.Scale) +
                             translateToOffset, animationLength, easing);
+
+                        animations.Add(animation);
+                    }
                     else
-                        existingMessage.TranslateTo(0, existingMessage.TranslationY + (existingMessage.Height * existingMessage.Scale) +
+                    {
+                        var animation = existingMessage.TranslateTo(0, existingMessage.TranslationY + (frame.Height * existingMessage.Scale) +
                             translateToOffset, animationLength, easing);
+
+                        animations.Add(animation);
+                    }
 
                     if (index <= Options.NewMessagePosition.MaxMessagesShown)
                         existingMessage.Opacity = existingMessage.Opacity == 0.0d ? 0.0d : existingMessage.Opacity - opacityAdjustment;
@@ -269,6 +281,8 @@ namespace ToasterMessageQueue
             {
                 Console.WriteLine(ex.Message);
             }
+
+            await Task.WhenAll(animations.ToArray());
 
             await Task.Delay(150);
 
